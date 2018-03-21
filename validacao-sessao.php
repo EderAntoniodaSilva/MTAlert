@@ -25,31 +25,48 @@
 						$resultado_dados_pessoais= mysqli_query($conn, $result_dados_pessoais);
 						//ID do usuario inserido
                         $ultimo_id_usuario = mysqli_insert_id($conn);
-                        echo(" este é o ultimo usuario- $ultimo_id_usuario");
+                        $conn->close();
+                        //teste para ver o ultimo ID   echo(" este é o ultimo usuario- $ultimo_id_usuario"); 
 						$_SESSION['ultimo_id_usuario'] = $ultimo_id_usuario; ?>							
 						<div class="alert alert-success" role="alert">Usuário inserido com sucesso</div>
 						<?php $_SESSION['control_aba'] = 1;
-					}
+                    }
+                    
 					if(isset($_POST['nome_contato'])){
 						$id_usuario = $_SESSION['ultimo_id_usuario'];
                         $nome_contato = $_POST['nome_contato'];
                         $celular = $_POST['celular'];
                         $email = $_POST['email'];
                         $senha1 = $_POST['senha1'];
-                        $endereco = $_POST['endereco'];
+                        $endereco = $_POST['endereco1'];
                         $numero = $_POST['numero'];
                         $bairro = $_POST['bairro'];
                         $cidade = $_POST['cidade'];
                         $estado = $_POST['estado'];
 
-                        $result_dados_contato = "INSERT INTO contato (nome, celular, email, endereco, numero, bairro, cidade, estado,id_usuario)
-                            VALUES('$nome', '$celular', '$email', '$endereco', '$numero', '$bairro', '$cidade', '$estado', '$id_usuario')";
-						$resultado_dados_contato= mysqli_query($conn, $result_dados_contato);?>
-				
+                        $result_dados_contato = "INSERT INTO usuario (nome, celular, email, endereco, numero, bairro, cidade, estado,id_contato)
+                            VALUES('$nome_contato', '$celular', '$email', '$endereco', '$numero', '$bairro', '$cidade', '$estado', '$id_usuario')";
+                        $resultado_dados_contato= mysqli_query($conn, $result_dados_contato);
+                        $conn->close();?>                    
 							
 						<div class="alert alert-success" role="alert">Dados de contato inserido com sucesso</div>
 						<?php $_SESSION['control_aba'] = 2;
-					}
+                    }
+                    // Fazer validador de sessão similar ao de cima que pegue o id do box selec e insere no id-contato
+                    if(isset($_POST['id_contato'])){
+						$id_usuario = $_SESSION['ultimo_id_usuario'];
+                        $id_contato = $_POST['id_contato'];                    
+                        
+                        $result_dados_contato = "UPDATE usuario SET id_contato = '$id_contato' WHERE id = $id_usuario";
+                        $resultado_dados_contato= mysqli_query($conn, $result_dados_contato);
+                        $conn->close();?>                        
+							
+						<div class="alert alert-success" role="alert">Dados de contato inserido com sucesso</div>
+						<?php $_SESSION['control_aba'] = 2;
+                    }
+
+                    //fimmmmmmmmmmmmmmmmm
+                    
 					if(isset($_POST['n_serial'])){
 						$id_usuario = $_SESSION['ultimo_id_usuario'];
 						$n_serial = $_POST['n_serial'];
@@ -60,10 +77,12 @@
                         
 						$result_veiculo = "INSERT INTO veiculo (n_serial, tipo, marca, modelo, placa, id_usuario ) 
                             VALUES ('$n_serial', '$tipo', '$marca', '$modelo', '$placa','$id_usuario')";
-						$resultado_veiculo = mysqli_query($conn, $result_veiculo);?>							
+                        $resultado_veiculo = mysqli_query($conn, $result_veiculo);
+                        $conn->close();?>							
 						<div class="alert alert-success" role="alert">Veiculo inserido com sucesso</div>
 						<?php $_SESSION['control_aba'] = 3;
-					}
+                    }               
 				}
 			?>
-			<div>
+		<div>
+        
