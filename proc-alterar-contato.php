@@ -1,7 +1,8 @@
 <?php
+session_start();
 include_once("conexao.php");
 $id = filter_input(INPUT_GET,"id", FILTER_SANITIZE_NUMBER_INT);
-echo "$id";
+
 
 if (isset($_POST['nome_contato_editar'])){
     $id_alt = $_POST['id_alt'];
@@ -22,12 +23,12 @@ if (isset($_POST['nome_contato_editar'])){
     echo '<div class="alert alert-success" role="alert">Contato alterado com sucesso</div>'   ;
     header("Location: listar-usuario.php");
 }
-//Excluir
-if (isset($_GET['id'])){
-    $id_exit = $_GET['id'];
-    echo "Aqui $id_ext";
-    $result_exit_contato = "DELETE FROM usuario WHERE id= '$id_exit'";
-    $resultado_exit_contato = mysqli_query($conn, $resultado_exit_contato);
-    $conn->close();
+if(mysqli_affectd_rows($conn)){
+    $_SESSION['msg'] = '<div class="alert alert-success" role="alert"> Usuário apagado com sucesso</div>';
+    header("Location: listar-usuario.php");
+}else{
+
+    $_SESSION['msg'] = "<p style='color:red;'> ERRO não foi apagado com sucesso</p>";
+    header("Location: listar-usuario.php");
 }
 ?>

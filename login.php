@@ -1,3 +1,9 @@
+<?php session_start();
+	if(isset($_SESSION['msg'])){
+		echo $_SESSION['msg'];
+		unset($_SESSION['msg']);
+	}
+?>
 <!-- incluindo base comum de html  -->
 <?php include_once "cabecalho.php"; ?>
 
@@ -21,7 +27,7 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"id="sizing-addon1">@</span>
-								<input type="text" class="form-control" name="email" id="email"  placeholder="Enter com seu e-mail"/>
+								<input type="text" class="form-control" name="usuario"   placeholder="Enter com seu e-mail"/>
 							</div>
 						</div>
 					</div>
@@ -38,7 +44,7 @@
 
 
 					<div class="form-group ">
-						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="btn_login">Entrar</button>
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="btnLogin" value="Acessar">Entrar</button>
 					</div>
 					<div class="login-register">
 				           <a href="cadastro-usuario.php">Cadastrar - se</a>

@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	include_once('cabecalho.php');
 	$id = filter_input(INPUT_GET,"id", FILTER_SANITIZE_NUMBER_INT);
 	$result_contatos = "SELECT * FROM usuario WHERE id = $id";
@@ -6,9 +7,15 @@
 	$linha_contato = mysqli_fetch_assoc($resultado_contato);
 ?>
 <div class="container theme-showcase" >
-    <h1> Auteração dos contatos cadastrados </h1>
+	<h1> Auteração dos contatos cadastrados </h1>
+	<?php
+		if(isset($_SESSION['msg'])){
+			echo $_SESSION['msg'];
+			unset($_SESSION['msg']);
+		}
+		?>
 
-	<form class="form-horizontal"  action="edit-excluir-contato.php" method="POST">
+	<form class="form-horizontal"  action="proc-alterar-contato.php" method="POST">
 		<input type="hidden" name="id_alt" value="<?php echo $linha_contato['id']; ?>">
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Nome</label>
