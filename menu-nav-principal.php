@@ -13,17 +13,21 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="index.php">Home</a></li>
+          <li class="nav-item active"><a href="index.php">Home</a></li>
         <!--  <li><a href="formulario.php">Cadastrar</a></li>    Retirado link de cadastro-->
-          <li><a href="cadastro-usuario.php">Cadastrar-se</a></li>
-          <li><a href="listar-usuario.php">Listar</a></li>
+          
           <?php
               session_start();
-              if (isset($_SESSION['id'])) {
-                  echo '<li class="nav-item active"><a class="nav-link" href="destroi_sessao.php">Sair <span class="sr-only">(current)</span></a></li>';
+              if (isset($_SESSION['id_usuario'])) {
+                echo '<li><a href="listar-usuario.php"> Listar Contato </a></li>';
+                echo '<li><a href="#">Dados Cadastrais</a></li>';
+                echo '<li class="nav-item active"><a class="nav-link" href="destroi_sessao.php">Sair <span class="sr-only">(current)</span></a></li>';              
+              }else{
+                echo '<li ><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>';
               }
           ?>
         </ul>
+         
       </div><!--/.nav-collapse -->
     </div>
   </nav>

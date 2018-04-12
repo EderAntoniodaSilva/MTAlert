@@ -5,7 +5,7 @@
 				</li>
 				
 				<li role="presentation" <?php if($_SESSION['control_aba'] == 1){ echo "class='active'"; } ?> >
-					<?php if(isset($_SESSION['ultimo_id_usuario'])){
+					<?php if(isset($_SESSION['id_usuario'])){
 						?><a href="#dados_de_contato" aria-controls="dados_de_contato" role="tab" data-toggle="tab"><?php
 					}else{
 						?><a href="#" aria-controls="dados_de_contato" role="tab" data-toggle="tab"><?php

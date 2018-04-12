@@ -1,26 +1,23 @@
-<?php 
-	session_start();
-	include_once('cabecalho.php');
-	$id = filter_input(INPUT_GET,"id", FILTER_SANITIZE_NUMBER_INT);
-	$result_contatos = "SELECT * FROM usuario WHERE id = $id";
-	$resultado_contato = mysqli_query($conn, $result_contatos);
-	$linha_contato = mysqli_fetch_assoc($resultado_contato);
-?>
 <div class="container theme-showcase" >
-	<h1> Auteração dos contatos cadastrados </h1>
-	<?php
-		if(isset($_SESSION['msg'])){
-			echo $_SESSION['msg'];
-			unset($_SESSION['msg']);
-		}
-		?>
+    <h1> Novo contato </h1>
 
-	<form class="form-horizontal"  action="proc-alterar-contato.php" method="POST">
-		<input type="hidden" name="id_alt" value="<?php echo $linha_contato['id']; ?>">
+	<?php
+	session_start();
+    include_once('cabecalho.php');
+    
+    if(isset($_SESSION['msg'])){
+        echo $_SESSION['msg'];
+        unset($_SESSION['msg']);
+    }
+    $id_usuario = $_SESSION['id_usuario'];
+    ?>
+
+	<form class="form-horizontal"  action="proc-novo-contato.php" method="POST">
+		<input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Nome</label>
 			<div class="col-sm-10">
-				<input type="text" name="nome_contato_editar" class="form-control" id="nome_contato_editar" placeholder="Nome de seu contato"
+				<input type="text" name="nome_contato_novo" class="form-control" id="nome_contato_novo" placeholder="Nome de seu contato"
 					value="<?php echo $linha_contato['nome']; ?>">
 			</div>
 		</div>
@@ -75,10 +72,9 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-success">Editar</button>
+				<button type="submit" class="btn btn-success">Enviar</button>
 			</div>
 		</div>
 	</form>
 	<?php include_once('rodape.php') ?>
 </div>
-				

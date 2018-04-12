@@ -31,4 +31,5 @@ if(mysqli_affectd_rows($conn)){
     $_SESSION['msg'] = "<p style='color:red;'> ERRO não foi apagado com sucesso</p>";
     header("Location: listar-usuario.php");
 }
+
 ?>

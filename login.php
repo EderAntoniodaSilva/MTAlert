@@ -3,6 +3,12 @@
 		echo $_SESSION['msg'];
 		unset($_SESSION['msg']);
 	}
+	if(isset($_SESSION['id_usuario'])){
+		echo $_SESSION['msg']="Usuario ja logado";
+		unset($_SESSION['msg']);
+		header("Location: index.php");
+
+	}
 ?>
 <!-- incluindo base comum de html  -->
 <?php include_once "cabecalho.php"; ?>
@@ -47,12 +53,13 @@
 						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="btnLogin" value="Acessar">Entrar</button>
 					</div>
 					<div class="login-register">
-				           <a href="cadastro-usuario.php">Cadastrar - se</a>
+				           <!--<a href="cadastro-usuario.php">Cadastrar - se</a>-->
+						   <a href="main-form-cadastro.php">Cadastrar - se</a>
 				    </div>
                 </form>
 			</div>
 		</div>
 	</div>
 	<!-- incluindo Roda pé -->
-	<?php require_once "rodape.php"; ?>
+	<?php require_once "view/rodape.php"; ?>
 

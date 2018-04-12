@@ -22,7 +22,7 @@ if($btnLogin){
 			$row_usuario = mysqli_fetch_assoc($resultado_usuario);
 			//Usar este para senha criptografada -> if(password_verify($senha, $row_usuario['senha'])){      	        
 			if($senha == $row_usuario['senha']){
-				$_SESSION['id'] = $row_usuario['id'];
+				$_SESSION['id_usuario'] = $row_usuario['id'];
 				$_SESSION['nome'] = $row_usuario['nome'];
 				$_SESSION['email'] = $row_usuario['email'];
 				header("Location: listar-usuario.php");//lista de contado do usuario
