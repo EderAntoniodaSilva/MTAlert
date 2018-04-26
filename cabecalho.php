@@ -1,6 +1,6 @@
 
  <?php 
-	include_once("conexao.php");
+	include_once("db/conexao.php");
 	session_start();
 	/* Controlar abas*/
 	if(!isset($_SESSION['control_aba'])){

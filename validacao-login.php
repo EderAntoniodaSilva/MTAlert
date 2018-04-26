@@ -3,7 +3,7 @@
 //inicia a sessão
 session_start();
 //incluir conexão do banco 
-include_once("conexao.php");
+include_once("db/conexao.php");
 $btnLogin = filter_input(INPUT_POST, 'btnLogin', FILTER_SANITIZE_STRING);
 
 if($btnLogin){
@@ -16,7 +16,7 @@ if($btnLogin){
 		//echo password_hash($senha, PASSWORD_DEFAULT);
 		//Pesquisar o usuário no BD
 		$result_usuario = "SELECT * FROM usuario WHERE email='$usuario' LIMIT 1";
-		$resultado_usuario = mysqli_query($conn, $result_usuario);
+		$resultado_usuario = mysqli_query($conn, $result_usuario);			
 
 		if($resultado_usuario){
 			$row_usuario = mysqli_fetch_assoc($resultado_usuario);
