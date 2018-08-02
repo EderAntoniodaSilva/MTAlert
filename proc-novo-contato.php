@@ -1,5 +1,5 @@
 <?php
-include_once("conexao.php");
+include_once("db/conexao.php");
 
 if (isset($_POST['nome_contato_novo'])){
 $id_usuario = $_POST['id_usuario'];

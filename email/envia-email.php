@@ -1,26 +1,14 @@
 <?php
-	//teste 1
-
-	//incluir conexão
-include_once('../db/conexao.php');
-//Buscar dados o Banco
-$result_usuario = "SELECT *FROM usuario WHERE id_contato = 9";
-$resultado_usuario = mysqli_query($conn, $result_usuario);
-        
-        while($linha_contato = mysqli_fetch_assoc($resultado_usuario)){
-            //coleta dados
-           // $id = $linha_contato['id'];
-            $nome = $linha_contato['nome'];
-            $cel = $linha_contato['celular'];
-            $email = $linha_contato['email'];
-			//$end = $linha_contato['enndereco'];
-			echo"$nome";
-			echo"$email";
- 
+function enviaEmail($n_serial){
+	
 	/*** INÍCIO - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
- 
+	include('../db/dados-para-envio-email.php');
+	
+	$nome = "teste nome Banco";
+	
 	$enviaFormularioParaNome = "$nome"; //'Nome do destinatário que receberá formulário';
-	$enviaFormularioParaEmail = "$email"; //'email-do-destinatario@dominio';
+	//$enviaFormularioParaEmail = "$emailArray"; //'email-do-destinatario@dominio';
+	
  
 	$caixaPostalServidorNome = 'mtalertsalva@gmail.com'; //'WebSite | Formulário';
 	$caixaPostalServidorEmail = 'mtalertsalva@gmail.com'; //'usuario@seu-dominio';
@@ -39,6 +27,7 @@ $resultado_usuario = mysqli_query($conn, $result_usuario);
 	$mensagemConcatenada .= 'Muito Obrigado(a) !!!'.'<br>';
 	$mensagemConcatenada .= '------------------------------------------------------------------------<br><br>'; 
 	$mensagemConcatenada .= 'Email Automático, Por favor não Responder.'.'<br/>';
+	
 	 
 	/*********************************** A PARTIR DAQUI NAO ALTERAR ************************************/ 
  
@@ -60,13 +49,44 @@ $resultado_usuario = mysqli_query($conn, $result_usuario);
 	$mail->Subject  = utf8_decode("Possível Queda");
 	$mail->Body  = utf8_decode($mensagemConcatenada);
 
-
-	$mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
+	//echo"$enviaFormularioParaEmail";
+	//$mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
+	foreach($ArrayContato as $emailContato )
+		{
+		$mail->AddAddress($emailContato,utf8_decode($enviaFormularioParaNome));
+		
+		}
 		
 	if(!$mail->Send()){
 		$mensagemRetorno = 'Erro ao enviar formulário: '. print($mail->ErrorInfo);
+		echo('Erro ao enviar formulário: '. print($mail->ErrorInfo));
 	}else{
 		$mensagemRetorno = 'Formulário enviado com sucesso!';
+		echo('Formulário enviado com sucesso!');
 	} 
-} //adicionado esta chave
+
+}
+
+//enviaEmail();
+
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
