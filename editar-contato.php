@@ -7,7 +7,7 @@
 	$linha_contato = mysqli_fetch_assoc($resultado_contato);
 ?>
 <div class="container theme-showcase" >
-	<h1> Auteração dos contatos cadastrados </h1>
+	<h1> Alteração dos contatos cadastrados </h1>
 	<?php
 		if(isset($_SESSION['msg'])){
 			echo $_SESSION['msg'];

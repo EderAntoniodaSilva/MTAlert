@@ -3,10 +3,8 @@ function enviaEmail($n_serial){
 	
 	/*** INÍCIO - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
 	include('../db/dados-para-envio-email.php');
-	
-	$nome = "teste nome Banco";
-	
-	$enviaFormularioParaNome = "$nome"; //'Nome do destinatário que receberá formulário';
+		
+	//$enviaFormularioParaNome = "$nomeContato"; //'Nome do destinatário que receberá formulário';
 	//$enviaFormularioParaEmail = "$emailArray"; //'email-do-destinatario@dominio';
 	
  
@@ -23,7 +21,9 @@ function enviaEmail($n_serial){
 	$mensagemConcatenada .= '----------------------------------------------------------------------<br><br/>'; 
 	$mensagemConcatenada .= 'Foi detectado uma possível queda '.'<br>'; 
 	$mensagemConcatenada .= 'Favor entrar em contato com o '.$nome.'<br>'; 
-	$mensagemConcatenada .= 'Pelo Telefone de contato '.$cel.'<br>';
+	$mensagemConcatenada .= 'Pelo Telefone de contato '.$cel.'<br><br>';
+	$mensagemConcatenada .= 'Caso não consiga tomar as medidas Cabíveis'.'<br>';
+	$mensagemConcatenada .= 'GeoLocalização do ocorrido  '.$latitude.' '.$longitude.'<br>';
 	$mensagemConcatenada .= 'Muito Obrigado(a) !!!'.'<br>';
 	$mensagemConcatenada .= '------------------------------------------------------------------------<br><br>'; 
 	$mensagemConcatenada .= 'Email Automático, Por favor não Responder.'.'<br/>';
@@ -51,10 +51,10 @@ function enviaEmail($n_serial){
 
 	//echo"$enviaFormularioParaEmail";
 	//$mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
-	foreach($ArrayContato as $emailContato )
+	foreach($ArrayContato as $emailContato)
 		{
-		$mail->AddAddress($emailContato,utf8_decode($enviaFormularioParaNome));
-		
+		$mail->AddAddress($emailContato,utf8_decode($enviaFormularioParaNome)); 
+		//$mail->AddAddress($emailContato,utf8_decode($nomeContato));//funcionando
 		}
 		
 	if(!$mail->Send()){
